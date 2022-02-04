@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const csrf = require("csurf");
 const nodemailer = require("nodemailer");
@@ -61,7 +62,7 @@ router.post(
         rejectUnauthorized: false,
       },
     });
-
+    
     // email options
     const mailOpts = {
       from: req.body.email,
@@ -81,6 +82,7 @@ router.post(
 
     // send the email
     smtpTrans.sendMail(mailOpts, (error, response) => {
+      
       if (error) {
         req.flash(
           "error",
